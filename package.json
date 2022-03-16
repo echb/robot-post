@@ -1,0 +1,17 @@
+{
+  "name": "robot-post",
+  "version": "0.0.0",
+  "description": "robot post",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GNU GPLV3",
+  "dependencies": {
+    "jimp": "0.16.1",
+    "puppeteer": "13.5.1"
+  },
+  "devDependencies": {}
+}
