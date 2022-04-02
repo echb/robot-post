@@ -68,6 +68,9 @@ const editImage = async (dirPothos, cover, imageText) => {
 
 }
 
+const selectDirnameFromFullPhotoPath = (string) => {
+  return string.substring(string.lastIndexOf("/") + 1, string.lastIndexOf("?"));
+}
 
 const selectedDirPhotos = async (dirPath) => {
   const fs = require('fs')
@@ -84,5 +87,6 @@ module.exports = {
   limitString,
   generateRandomNumberRange,
   editImage,
-  selectedDirPhotos
+  selectedDirPhotos,
+  selectDirnameFromFullPhotoPath
 }
