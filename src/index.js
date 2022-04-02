@@ -3,7 +3,8 @@ const {
   limitString,
   generateRandomNumberRange,
   editImage,
-  selectedDirPhotos
+  selectedDirPhotos,
+  selectDirnameFromFullPhotoPath
 } = require('./helpers.js')
 
 const awaitPageToLoad = 'html > body > div:nth-of-type(1) > div > div:nth-of-type(1) > div > div:nth-of-type(3) > div > div > div:nth-of-type(1) > div:nth-of-type(1) > div > div:nth-of-type(1) > div > div > div:nth-of-type(1) > div > div > div:nth-of-type(1) > ul > li > div > a > div:nth-of-type(1) > div:nth-of-type(2) > div > div > div > div > span > span'
@@ -413,22 +414,35 @@ class robotFabric {
     title,
     price,
     details,
-    cover,
-    dirPathPhotos,
+    cover = '',
+    dirPathPhotos = '',
+    photosServer = []
   }, itemCodition, defaultLabelOnTitleAndDescription, imageText, itemCategory) => {
-    editImage(dirPathPhotos, cover, imageText)
+
+    if (cover && dirPathPhotos) {
+      editImage(dirPathPhotos, cover, imageText)
+    } else {
+      editImage(selectDirnameFromFullPhotoPath(photosServer[0]), photosServer[0], imageText)
+    }
+
     await this.page.goto(createNewPostUrl);
     await this.page.waitForSelector(createNewPost)
 
 
     // select files
-    const photos = await selectedDirPhotos(dirPathPhotos)
+    let photos
+    if (cover && dirPathPhotos) {
+      photos = await selectedDirPhotos(dirPathPhotos)
+    } else {
+      photos = photosServer
+    }
 
     const [fileChooser] = await Promise.all([
       this.page.waitForFileChooser(),
       this.page.click(createNewPost),
     ]);
     await fileChooser.accept(photos);
+
 
     await this.selectTitle(title, defaultLabelOnTitleAndDescription)
 
@@ -751,7 +765,6 @@ class robotFabric {
     await this.browser.close();
   }
 }
-
 
 module.exports = {
   robotFabric
