@@ -806,8 +806,11 @@ class robotFabricVersion2 {
     // if (cover && dirPathPhotos) {
     //   editImage(dirPathPhotos, cover, imageText)
     // } else {
-    editImage(selectDirnameFromFullPhotoPath(photosServer[0]), photosServer[0], imageText)
+    const pathDirToEditedPic = selectDirnameFromFullPhotoPath(photosServer[0])
+    // editImage(selectDirnameFromFullPhotoPath(photosServer[0]), photosServer[0], imageText)
+    editImage(pathToEditedPic, photosServer[0], imageText)
     // }
+    const pathEditedPic = pathDirToEditedPic + '/1.jpg'
 
     await this.page.goto(createNewPostUrl);
     await this.page.waitForSelector(createNewPost)
@@ -819,6 +822,8 @@ class robotFabricVersion2 {
     //   photos = await selectedDirPhotos(dirPathPhotos)
     // } else {
     const photos = photosServer
+
+    photos.unshift(pathEditedPic)
     // }
 
     const [fileChooser] = await Promise.all([
