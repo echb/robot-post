@@ -798,33 +798,22 @@ class robotFabricVersion2 {
     title,
     price,
     details,
-    // cover = '',
-    // dirPathPhotos = '',
-    photosServer = []
-  }, itemCodition, defaultLabelOnTitleAndDescription, imageText, itemCategory) => {
+    photosServer = [],
+    itemCodition,
+    itemCategory,
+    defaultLabelOnTitleAndDescription,
+    postEditPhoto,
+  }) => {
 
-    // if (cover && dirPathPhotos) {
-    //   editImage(dirPathPhotos, cover, imageText)
-    // } else {
-    const pathDirToEditedPic = selectDirnameFromFullPhotoPath(photosServer[0])
-    // editImage(selectDirnameFromFullPhotoPath(photosServer[0]), photosServer[0], imageText)
-    editImage(pathToEditedPic, photosServer[0], imageText)
-    // }
-    const pathEditedPic = pathDirToEditedPic + '/1.jpg'
+    if (postEditPhoto) {
+      editImage(selectDirnameFromFullPhotoPath(photosServer[1]), photosServer[1])
+    }
 
     await this.page.goto(createNewPostUrl);
     await this.page.waitForSelector(createNewPost)
 
 
-    // select files
-    // let photos
-    // if (cover && dirPathPhotos) {
-    //   photos = await selectedDirPhotos(dirPathPhotos)
-    // } else {
     const photos = photosServer
-
-    photos.unshift(pathEditedPic)
-    // }
 
     const [fileChooser] = await Promise.all([
       this.page.waitForFileChooser(),
