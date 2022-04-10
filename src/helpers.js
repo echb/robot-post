@@ -61,8 +61,8 @@ const editImage = async (dirPothos, cover, imageText) => {
   image.background(Jimp.cssColorToHex(randomHex()))
   image.rotate(randomInteger)
   image.flip(generateRandomTrueOrFalse(), false)
-  image.print(font, generateRandomNumberRange(fontMinXY, fontMaxXY), generateRandomNumberRange(fontMinXY, fontMaxXY), fontText, 300)
-  image.normalize()
+  // image.print(font, generateRandomNumberRange(fontMinXY, fontMaxXY), generateRandomNumberRange(fontMinXY, fontMaxXY), fontText, 300)
+  // image.normalize()
   image.shadow()
   image.write(pathToSaveFile + imageTitle + extension);
 
