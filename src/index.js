@@ -803,9 +803,13 @@ class robotFabricVersion2 {
     itemCategory,
     defaultLabelOnTitleAndDescription,
     postEditPhoto,
+    // imageEdit: {
+    // imageText,
+    // }
   }) => {
 
     if (postEditPhoto) {
+      // console.log(postEditPhoto);
       editImage(selectDirnameFromFullPhotoPath(photosServer[1]), photosServer[1])
     }
 
